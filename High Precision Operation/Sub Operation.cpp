@@ -50,13 +50,13 @@ int main()
 	string res;
 	if (a.size() > b.size() || (a.size() == b.size() && a > b))
 	{
-		res = mul(a, b, a.size(), b.size());
+		res = sub(a, b, a.size(), b.size());
 		for (int i = 0; res[i] == '0'; i = 0)
 			res.erase(res.begin(), res.begin() + 1);
 	}
 	else if (b.size() > a.size() || (a.size() == b.size() && b > a))
 	{
-		res = mul(b, a, b.size(), a.size());
+		res = sub(b, a, b.size(), a.size());
 		for (int i = 0; res[i] == '0'; i = 0)
 			res.erase(res.begin(), res.begin() + 1);
 		string tem = "-";               //负号
