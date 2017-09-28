@@ -19,7 +19,7 @@ vector <int> res;
 
 void solu(int leftcap,vector<int> &bag, vector<bool> &mark)
 {
-	if (leftcap < bag[0] || count(mark.begin(), mark.end(), false) == 0)
+	if (leftcap < bag[0] || count(mark.begin(), mark.end(), false) == 0)	//当剩余空间不能装入时，或物品用完时
 	{
 		if (leftcap == 0)
 		{
@@ -31,10 +31,10 @@ void solu(int leftcap,vector<int> &bag, vector<bool> &mark)
 	}
 	for (int i = n - 1; i >= 0; i--)
 	{
-		if (leftcap - bag[i] >= 0 && !mark[i])
+		if (leftcap - bag[i] >= 0 && !mark[i])				//物品没有被使用过，剩余空间足够装入物品
 		{
 			mark[i] = true;
-			solu(leftcap - bag[i], bag, mark);
+			solu(leftcap - bag[i], bag, mark);			//递归
 		}
 	}
 }
@@ -49,9 +49,9 @@ int main()
 	{
 		cin >> bag[i];
 	}
-	sort(bag.begin(), bag.end());	
+	sort(bag.begin(), bag.end());						//物品从小到大排序
 	solu(cap, bag, mark);
-	sort(res.begin(), res.end());
+	sort(res.begin(), res.end());						//剩余空间排序
 	cout << res[0];
 	return 0;
 }
@@ -68,11 +68,11 @@ int f[V], w, v, j;
 
 int main()
 {
-	cin >> v >> w;			    	//不需要读入n，对于下面那句来说没有必要	        		
-	while (cin >> w)          //滚动数组 w既表示体积，又表示价值
-	for (j = v; j >= w; j--)	//依次判断是否将物体放入容量为j的背包中
+	cin >> v >> w;			    	//不需要读入w，对于下面那句来说没有必要	        		
+	while (cin >> w)          		//滚动数组 w既表示体积，又表示价值
+	for (j = v; j >= w; j--)		//依次判断是否将物体放入容量为j的背包中
 		f[j] = max(f[j], f[j - w] + w);
-	cout << v - f[v];
+	cout << v - f[v];			//输出最小剩余空间
 	return 0;
 }
 
