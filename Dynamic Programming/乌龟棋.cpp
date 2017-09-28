@@ -14,14 +14,7 @@ using namespace std;
 const int SZ = 100;
 static int dp[SZ][SZ][SZ][SZ];
 static int b[5];
-int max(int a, int b, int c, int d)
-{
-	int m = a;
-	if (b > m) m = b;
-	if (c > m) m = c;
-	if (d > m) m = d;
-	return m;
-}
+
 int main()
 {
 	int n, m;
@@ -29,12 +22,12 @@ int main()
 	vector<int> a(n);
 	for (int i = 0; i<n; i++)
 	{
-		cin >> a[i];
+		cin >> a[i];		//路径上点的分数
 	}
 	for (int i = 0; i<m; i++)
 	{
 		cin >> b[0];
-		b[b[0]]++;
+		b[b[0]]++;		//1,2,3,4步的个数
 	}
 	int maxScore = 0;
 	for (int t = 0; t <= b[1]; t++)
@@ -50,7 +43,7 @@ int main()
 					if (i) maxScore = maxScore > dp[t][i - 1][j][k] ? maxScore : dp[t][i - 1][j][k];
 					if (j) maxScore = maxScore > dp[t][i][j - 1][k] ? maxScore : dp[t][i][j - 1][k];
 					if (k) maxScore = maxScore > dp[t][i][j][k - 1] ? maxScore : dp[t][i][j][k - 1];
-					dp[t][i][j][k] = maxScore + a[t + 2 * i + 3 * j + 4 * k];
+					dp[t][i][j][k] = maxScore + a[t + 2 * i + 3 * j + 4 * k];		//乌龟此时的位置分数
 				}
 			}
 		}
