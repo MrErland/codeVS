@@ -28,10 +28,10 @@ int main()
 	vector<struct lines> lin(n);
 	for (int i = 0; i < n; i++)
 		cin >> lin[i].l >> lin[i].r >> lin[i].w;
-	qsort(&lin[0], n, sizeof(lin[0]), cmp);				//优先左端点从小到大排序，再排右端点从小到大
-	vector<int> dpw(n);									//表示选中线段的最大权值
-	vector<int> dpl(n);									//选中线段不重复的右边界
-	for (int i = 0; i < n; i++)
+	qsort(&lin[0], n, sizeof(lin[0]), cmp);			//优先左端点从小到大排序，再排右端点从小到大
+	vector<int> dpw(n);					//表示选中线段的最大权值
+	vector<int> dpl(n);					//选中线段不重复的右边界
+	for (int i = 0; i < n; i++)				//初始化
 	{
 		dpl[i] = lin[i].r;
 		dpw[i] = lin[i].w;
