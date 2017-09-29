@@ -45,7 +45,7 @@ int main()
 		vector <int> path(a);
 		vector <bool> mark(a);
 		for (int i = 0; i < a; i++)
-			path[i] = i;							          	//初始
+			path[i] = i;						//初始
 		for (int i = a - 2; i >= 0; i--)
 		{
 			for (int j = i + 1; j < a; j++)
@@ -55,7 +55,7 @@ int main()
 					temp = dp[i];
 					dp[i] = max(dp[j] + 1, dp[i]);		//找到小于当前高度的后续最大高度
 					if (dp[i] != temp)
-						path[i] = j;					          //保存可以拦截的炮弹
+						path[i] = j;			//保存可以拦截的炮弹
 				}
 			}
 		}
@@ -63,7 +63,7 @@ int main()
 		maxNum = maxNum > nowNum ? maxNum : nowNum;
 		vector<int>::iterator now = find(dp.begin(), dp.end(), nowNum);
 		int site = now - dp.begin();
-		while (path[site] != site)					  	//找到这次拦截的炮弹
+		while (path[site] != site)					 //找到这次拦截的炮弹
 		{
 			mark[site] = 1;
 			site = path[site];
@@ -75,9 +75,9 @@ int main()
 			if (mark[i])
 				height.erase(height.begin() + i, height.begin() + i + 1);
 		}
-		a = height.size();							       	//重新初始化a
+		a = height.size();						//重新初始化a
 	}
-	cout << maxNum << endl;								    //找到一次拦截导弹的最大数量--第一次
+	cout << maxNum << endl;							//找到一次拦截导弹的最大数量--第一次
 	cout << times;
 	return 0;
 }
