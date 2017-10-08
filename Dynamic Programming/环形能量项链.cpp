@@ -34,7 +34,7 @@ int main()
 		a[n + i] = a[i];			//数组表示环
 	}
 	int len, temp, i, j;
-	for (len = 1; len < n; len++)
+	for (len = 1; len < n; len++)			//聚合的数量
 	{
 		for (i = 1; i + len < 2 * n; i++)
 		{
