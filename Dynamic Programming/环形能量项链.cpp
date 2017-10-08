@@ -31,7 +31,7 @@ int main()
 	for (int i = 1; i <= n; i++)
 	{
 		cin >> a[i];
-		a[n + i] = a[i];			            //数组表示环
+		a[n + i] = a[i];			//数组表示环
 	}
 	int len, temp, i, j;
 	for (len = 1; len < n; len++)
