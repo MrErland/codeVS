@@ -5,7 +5,7 @@
 *输出：一个整数表示最小合并代价。
 */
 
-/***递推法***/
+/***自底向上递推法***/
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -41,4 +41,39 @@ int main()
 }
 
 
-/***记忆化搜索***/
+/***自顶向下搜索法***/
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+const int INF = 0xffffff;
+static int dp[100][100];
+
+int solve(int l, int r, vector<int> &sum)
+{
+	if (dp[l][r] != -1)
+		return dp[l][r];
+	int res = INF;
+	for (int i = l; i < r; i++)
+		res = min(res, solve(l, i, sum) + solve(i + 1, r, sum) + sum[r] - sum[l - 1]);
+	return dp[l][r] = res;
+}
+
+int main()
+{
+	int n, i;
+	cin >> n;
+	vector<int> arr(n + 1);
+	vector<int> sum(n + 1, 0);
+	for (i = 1; i <= n; i++)
+	{
+		cin >> arr[i];
+		sum[i] = sum[i - 1] + arr[i];
+	}
+	memset(dp, -1, sizeof(dp));
+	for (i = 0; i <= n; i++)
+		dp[i][i] = 0;
+	cout << solve(1, n, sum);
+	return 0;
+}
