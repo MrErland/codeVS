@@ -11,7 +11,8 @@
 #include <algorithm>
 using namespace std;
 const int INF = 0xffffff;
-static int dp[100][100];
+const int N = 200;
+static int dp[N][N];
 
 int main()
 {
@@ -48,7 +49,8 @@ int main()
 #include <algorithm>
 using namespace std;
 const int INF = 0xffffff;
-static int dp[100][100];
+const int N = 200;
+static int dp[N][N];
 
 int solve(int l, int r, vector<int> &sum)
 {
