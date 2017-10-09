@@ -16,7 +16,7 @@
 using namespace std;
 const int maxn = 85;
 const int maxm = 85;
-const int maxl = 30;		    	  //结果最大位数 5 * 29
+const int maxl = 30;		    	 	 //结果最大位数 5 * 29
 int a[maxm];		
 int dp[maxn][maxm][maxl];
 int pw[maxn][maxl];
@@ -69,7 +69,7 @@ void Add(int *x, int *y, int *z)		  //高精度加法 y+z保存到 x
 		x[i] = t[i];
 	return;
 }
-bool Max(int *x, int *y)	  	// x > y ?
+bool Max(int *x, int *y)	  		// x > y ?
 {
 	if (x[0] > y[0])
 		return 1;
@@ -93,22 +93,22 @@ int main()
 	int N, M;
 	int i, j, len, x, y;
 	cin >> N >> M;
-	pw[0][0] = 1;	//保存2的幂
+	pw[0][0] = 1;				//保存2的幂
 	pw[0][1] = 1;
 	for (int i = 1; i <= M; i++)
 		Multi(pw[i], pw[i - 1], 2);
-	ans[0] = 1;		//初始化结果,长度是1,初始为0
+	ans[0] = 1;				//初始化结果,长度是1,初始为0
 	ans[1] = 0;
 	for (i = 1; i <= N; i++)
 	{
-		for (j = 1; j <= M; j++)		//处理一行 -> a[]
+		for (j = 1; j <= M; j++)	//处理一行 -> a[]
 		{
 			cin >> a[j];							
 			Multi(dp[j][j], pw[M], a[j]);
 		}
 		for (len = 1; len < M; len++)			
 		{
-			for (x = 1; x <= M - len; x++)		//起點
+			for (x = 1; x <= M - len; x++)			//起點
 			{
 				y = x + len;				//終點
 				int xm[maxl], ym[maxl], cm[maxl];
