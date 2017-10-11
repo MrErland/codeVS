@@ -47,3 +47,39 @@ int main()
 	cout << ans;
 	return 0;
 }
+
+
+/*
+*No.2使用动态规划，从起始点横坐标到目的点横坐标为止。
+*AC
+*/
+
+#include <iostream>
+using namespace std;
+const int N = 51;
+static long long int dp[N][N];
+
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	int x, y, x2, y2;
+	cin >> x >> y >> x2 >> y2;
+	dp[x][y] = 1;
+	for (int i = x + 1; i <= x2; i++)
+	{
+		for (int j = 1; j <= m; j++)
+		{
+			if (j - 2 >= 1)
+				dp[i][j] += dp[i - 1][j - 2];
+			if (j + 2 <= m)
+				dp[i][j] += dp[i - 1][j + 2];
+			if (j - 1 >= 1)
+				dp[i][j] += dp[i - 2][j - 1];
+			if (j + 1 <= m)
+				dp[i][j] += dp[i - 2][j + 1];
+		}
+	}
+	cout << dp[x2][y2];
+	return 0;
+}
