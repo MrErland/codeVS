@@ -35,7 +35,7 @@ int main()
 	int temp;
 	for (int i1 = 1; i1 <= m; i1++)
 	{
-		for (int j1 = 1; j1 <= n; j1++)
+		for (int j1 = 1; j1 <= n; j1++)			//j1,j2可根据i1,i2优化
 		{
 			for (int i2 = 1; i2 <= m; i2++)
 			{
