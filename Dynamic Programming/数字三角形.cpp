@@ -5,12 +5,9 @@
 */
 
 
-
 #include <iostream>
 #include <algorithm>
-
 using namespace std;
-
 const int N = 100;
 static int dp[N];
 static int a[N];
