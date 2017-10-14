@@ -9,8 +9,21 @@
 #include <string>
 #include <cstring>
 #include <algorithm>
+#include <cmath>
 using namespace std;
 const int N = 41;
+
+int stoint(string &s)
+{
+	int a = 0;
+	char c;
+	for (int i = s.size() - 1, j = 0; i >= 0; i--, j++)
+	{
+		c = s[i];
+		a += (c - '0') * pow(10, j);
+	}
+	return a;
+}
 
 int main()
 {
@@ -27,7 +40,7 @@ int main()
 	{
 		for (j = i + 1; j <= n; j++)
 		{
-			mul[i + 1][j] = stoi(string(a, i, j - i), 0, 10);
+			mul[i + 1][j] = stoint(string(a, i, j - i));
 		}
 	}
 	for (i = 1; i <= n; i++)			//初始化dp[][0]
