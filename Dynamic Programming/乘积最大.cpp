@@ -30,14 +30,14 @@ int main()
 			mul[i + 1][j] = stoi(string(a, i, j - i), 0, 10);
 		}
 	}
-	for (i = 1; i <= n; i++)		//初始化dp[][0]
+	for (i = 1; i <= n; i++)			//初始化dp[][0]
 	{
 		dp[i][0] = mul[1][i];
 	}
 	int len;
-	for (len = 1; len <= k; len++)		//乘号个数
+	for (len = 1; len <= k; len++)			//乘号个数
 	{
-		for (i = len + 1; i <= n; i++)	//len个乘号时，前i个数字的最大值
+		for (i = len + 1; i <= n; i++)		//len个乘号时，前i个数字的最大值
 		{
 			for (j = len; j <= i; j++)
 				dp[i][len] = max(dp[i][len], dp[j][len - 1] * mul[j + 1][i]);
