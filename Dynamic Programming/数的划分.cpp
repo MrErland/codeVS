@@ -21,7 +21,7 @@ int main()
 		for (j = 1; j <= k; j++)
 		{
 			if (i >= j) 
-        dp[i][j] = dp[i - j][j] + dp[i - 1][j - 1];
+        			dp[i][j] = dp[i - j][j] + dp[i - 1][j - 1];
 		}
 	}
 	cout << dp[n][k];
