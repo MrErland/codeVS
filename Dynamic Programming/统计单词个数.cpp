@@ -12,84 +12,64 @@
 */
 
 
-
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <vector>
-#include <algorithm>
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<algorithm>
 using namespace std;
-
-int getmatch(const string &s, vector <string> &v)
-{
-	int ret = 0;
-	size_t i, j, k, t;
-	for (i = 0; i < s.size(); i++)
-	{
-		for (j = 1; j < v.size(); j++)
-		{
-			t = i;
-			for (k = 0; s[t] == v[j][k] && k <= v[j].size() - 1; k++, t++)
-				;
-			if (k == v[j].size())
-			{
-				ret++;
-				break;
-			}
-		}
-	}
-	return ret;
-}
+int check[201][201], dp[201][41];
 
 int main()
 {
 	int n;
 	cin >> n;
-	for (int i = 1; i <= n; i++)
+	while (n--)
 	{
-		size_t p, k;
-		cin >> p >> k;
-		string ins, ts;
-		for (size_t j = 1; j <= p; j++)
-		{
-			cin >> ts;
-			ins += ts;
-		}
-		int s;
-		cin >> s;
-		vector <string> word(s + 1);
-		for (int j = 1; j <= s; j++)
-			cin >> word[j];
-		int dp[201][41];								//前i个字符，分成k段
-		int a[201][201];
+		int p, k, d;
+		memset(check, 0, sizeof(check));
 		memset(dp, 0, sizeof(dp));
-		memset(a, 0, sizeof(a));
-		if (k == 1)
+		cin >> p >> k;
+		string s, t, word[7];
+		s = "";
+		while (p--)
 		{
-			for (size_t j = 0; j < ins.size(); j++)
-				dp[j + 1][1] = getmatch(string(ins, 0, j + 1), word);	
-			cout << dp[ins.size()][k] << endl;
-			continue;
+			cin >> t;
+			s += t;
 		}
-		for (size_t j = 0; j < ins.size(); j++)
+		cin >> d;
+		for (int i = 1; i <= d; i++)
+			cin >> word[i];
+		int i, j;
+		for (j = s.size() - 1; j >= 0; j--)
 		{
-			for (size_t k = j; k < ins.size(); k++)
+			for (i = j; i >= 0; i--)
 			{
-				a[j + 1][k + 1] = getmatch(string(ins, j, k - j + 1), word);	//初始化
-			}
-		}
-
-		for (size_t j = 0; j < ins.size(); j++)
-		{
-			for (size_t sz = 2; sz <= k && sz <= j; sz++)
-			{
-				for (size_t st = 0; st < j; st++)
+				bool found = false;
+				for (int k = 1; k <= d; k++)
 				{
-					dp[j + 1][sz] = max(dp[j + 1][sz], dp[st + 1][sz - 1] + a[st + 1][j + 1]);
+					if (s.find(word[k], i) == i && word[k].size() <= j - i + 1)
+					{
+						found = true;
+						break;
+					}
 				}
+				if (found)
+					check[i][j] = check[i + 1][j] + 1;
+				else
+					check[i][j] = check[i + 1][j];
 			}
 		}
-		cout << dp[ins.size()][k] << endl;
+		for ( i = 0; i<s.size(); i++)
+			dp[i][1] = check[0][i];
+		for (j = 2; j <= k; j++)
+		{
+			for (i = j - 1; i < s.size(); i++)
+			{
+				for (int t = i - 1; t >= j - 1; t--)
+					dp[i][j] = max(dp[i][j], dp[t][j - 1] + check[t + 1][i]);
+			}
+		}
+		cout << dp[s.size() - 1][k] << endl;
 	}
 	return 0;
 }
