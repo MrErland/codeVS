@@ -13,13 +13,11 @@
 
 
 
-
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
 
 int getmatch(const string &s, vector <string> &v)
@@ -47,7 +45,6 @@ int main()
 {
 	int n;
 	cin >> n;
-	vector <int> ans(n + 1);
 	for (int i = 1; i <= n; i++)
 	{
 		size_t p, k;
@@ -63,22 +60,22 @@ int main()
 		vector <string> word(s + 1);
 		for (int j = 1; j <= s; j++)
 			cin >> word[j];
-		int dp[201][41];						//前i个字符，分成k段
+		int dp[201][41];								//前i个字符，分成k段
 		int a[201][201];
 		memset(dp, 0, sizeof(dp));
 		memset(a, 0, sizeof(a));
 		if (k == 1)
 		{
 			for (size_t j = 0; j < ins.size(); j++)
-				dp[j + 1][1] = getmatch(string(ins, 0, j + 1), word);		//初始化
-			ans[i] = dp[ins.size()][k];
+				dp[j + 1][1] = getmatch(string(ins, 0, j + 1), word);	
+			cout << dp[ins.size()][k] << endl;
 			continue;
 		}
 		for (size_t j = 0; j < ins.size(); j++)
 		{
 			for (size_t k = j; k < ins.size(); k++)
 			{
-				a[j + 1][k + 1] = getmatch(string(ins, j, k - j + 1), word);		//初始化
+				a[j + 1][k + 1] = getmatch(string(ins, j, k - j + 1), word);	//初始化
 			}
 		}
 
@@ -92,9 +89,7 @@ int main()
 				}
 			}
 		}
-		ans[i] = dp[ins.size()][k];
+		cout << dp[ins.size()][k] << endl;
 	}
-	for (int i = 1; i <= n; i++)
-		cout << ans[i] << endl;
 	return 0;
 }
