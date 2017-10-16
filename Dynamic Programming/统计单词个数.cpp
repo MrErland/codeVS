@@ -44,22 +44,22 @@ int main()
 		{
 			for (i = j; i >= 0; i--)
 			{
-				bool found = false;
+				bool f = false;
 				for (int k = 1; k <= d; k++)
 				{
 					if (s.find(word[k], i) == i && word[k].size() <= j - i + 1)
 					{
-						found = true;
+						f = true;
 						break;
 					}
 				}
-				if (found)
+				if (f)
 					check[i][j] = check[i + 1][j] + 1;
 				else
 					check[i][j] = check[i + 1][j];
 			}
 		}
-		for ( i = 0; i<s.size(); i++)
+		for ( i = 0; i < s.size(); i++)
 			dp[i][1] = check[0][i];
 		for (j = 2; j <= k; j++)
 		{
