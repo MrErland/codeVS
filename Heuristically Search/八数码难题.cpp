@@ -20,16 +20,16 @@ int g[4][4] = {						//目标数组
 	{ 0, 8, 0, 4 },
 	{ 0, 7, 6, 5 }
 };
-int xx[4] = { 0, 0, 1, -1 };		//四个方向移动
+int xx[4] = { 0, 0, 1, -1 };				//四个方向移动
 int yy[4] = { 1, -1, 0, 0 };
 int hashArr[3733800] = {0};
 int step[N] = {0};
-int h = 0;			//当前状态
-int t = 1;			//总数
-bool flag = 0;		//结束标志
+int h = 0;						//当前状态
+int t = 1;						//总数
+bool flag = 0;						//结束标志
 
 
-int check()			//是否到达目标
+int check()						//是否到达目标
 {
 	for (int i = 1; i <= 3; i++)
 	{
@@ -42,7 +42,7 @@ int check()			//是否到达目标
 	return 1;
 }
 
-int Hash()				//去重
+int Hash()						//去重
 {
 	int s = 0, k = 1;
 	for (int i = 1; i <= 3; i++)
@@ -51,7 +51,7 @@ int Hash()				//去重
 			s += a[t].mp[i][j] * k, k *= 7;
 	}
 	s %= 3733799;
-	if (!hashArr[s])		//第一次出现
+	if (!hashArr[s])				//第一次出现
 	{
 		hashArr[s] = 1;
 		return 1; 
@@ -59,7 +59,7 @@ int Hash()				//去重
 	return 0;
 }
 
-int isOut(int x, int y)		//是否越界
+int isOut(int x, int y)					//是否越界
 {
 	if (x >= 1 && x <= 3 && y >= 1 && y <= 3) 
 		return 1;
@@ -73,13 +73,13 @@ void move(int x, int y)
 		int p = x + xx[i], q = y + yy[i];
 		if (isOut(p, q))
 		{
-			for (int j = 1; j <= 3; j++)
+			for (int j = 1; j <= 3; j++)			
 			{
 				for (int k = 1; k <= 3; k++)
 					a[t].mp[j][k] = a[h].mp[j][k];
 			}
-			swap(a[t].mp[x][y], a[t].mp[p][q]);
-			step[t] = step[h] + 1;
+			swap(a[t].mp[x][y], a[t].mp[p][q]);		//新的状态
+			step[t] = step[h] + 1;				//新的步数
 			if (check())    
 			{
 				cout << step[t];
