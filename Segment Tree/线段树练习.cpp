@@ -46,7 +46,7 @@ int main()
 }
 
 
-//线段树
+//线段树，效率是暴力法的几十倍，空间使用较多
 
 #include <cstdio>
 using namespace std;
