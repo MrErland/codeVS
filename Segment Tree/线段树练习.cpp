@@ -52,7 +52,7 @@ int main()
 using namespace std;
 #define min(a, b) (a < b ? a : b)
 const int SZ = 100000;
-struct SegTree{ int value; }seg[2 * SZ];
+struct SegTree{ int value; }seg[3 * SZ];
 int data[SZ];
 int N;
 int M;
@@ -65,7 +65,7 @@ void build(int root, int left, int right)
 		int mid = (left + right) / 2;
 		build(root * 2 + 1, left, mid);
 		build(root * 2 + 2, mid + 1, right);
-		seg[root].value = seg[root * 2 + 1].value + seg[root * 2 + 2].value;		//保存为左右结点的和
+		seg[root].value = seg[root * 2 + 1].value + seg[root * 2 + 2].value;	//保存为左右结点的和
 	}
 }
 
