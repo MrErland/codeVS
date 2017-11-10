@@ -8,7 +8,6 @@
 
 
 //循环链表解法  复杂度 N*M
-
 #include <cstdio>
 using namespace std;
 const int SZ = 30000;
@@ -54,7 +53,6 @@ int main()
 
 
 //数学法  最后胜利的人  复杂度 N
-
 #include<cstdio>
 int main()
 {
@@ -71,26 +69,7 @@ int main()
 }
 
 
-//数学法  复杂度 N*M
-
-#include <cstdio>
-int main()
-{
-	int n, i = 0, m, p;
-	scanf("%d %d", &n, &m);
-	while (++i < n)
-	{
-		p = i * m;
-		while (p > n)
-			p = p - n + (p - n - 1) / (m - 1);
-		printf("%d ", p);
-	}
-	return 0;
-}
-
-
 //线段树解法  复杂度 NlogN
-
 #include <cstdio>
 using namespace std;
 #define Lson l, m, root << 1
@@ -112,8 +91,6 @@ void build(int l, int r, int root)
 	seg[root] = seg[root << 1] + seg[root << 1 | 1];
 }
 
-//名次树是以名次为区间，通过对区间内的人数加减，再用相对位置与人数相比可得到他的编号所属区间，坐后递归直到得到了编号。
-
 void update(int p, int l, int r, int root) 
 {
 	seg[root]--;
@@ -125,7 +102,7 @@ void update(int p, int l, int r, int root)
 	int m = Mid;
 	if (p <= seg[root << 1])			//相对位置小于左边人数说明这个人的编号在左边
 		update(p, Lson);		
-	else								          //反之在右边，并且人数要减去左边人数
+	else						//反之在右边，并且人数要减去左边人数
 		update(p - seg[root << 1], Rson);
 	seg[root] = seg[root << 1] + seg[root << 1 | 1];
 }
@@ -134,7 +111,7 @@ int main()
 {
 	scanf("%d %d", &n, &m);
 	build(1, n, 1);
-	int seq = 1;						//从1开始报数
+	int seq = 1;					//从1开始报数
 	for (int i = 1; i <= n; ++i) 
 	{
 		seq = (seq + m - 1) % seg[1]; 
