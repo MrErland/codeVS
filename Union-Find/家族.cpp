@@ -26,8 +26,8 @@ void merge(int a, int b)
 	fb = fatr(b);
 	if (fa == fb)
 		return;
-	f[fa] = fb;                       //注意这个f[fa]
-	for (int i = 1; i <= N; i++)			//重新扫描所有点，f[a]为a根节点
+	f[fa] = fb;                      	//注意这个f[fa]
+	for (int i = 1; i <= N; i++)		//重新扫描所有点，f[a]为a根节点
 	{
 		int t = i;
 		while (f[i] != i)
