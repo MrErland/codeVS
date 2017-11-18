@@ -8,18 +8,17 @@
 */
 
 
+//采用贪心的思想，先按照地鼠的分值排序，依次将分值从大到小的地鼠填入其时间的site里
+//如果site已经被填充，则填充依次填充前一个site，知道前方site全部被占据，则舍弃这个地鼠的分值
 
 #include <cstdio>
 #include <algorithm>
 using namespace std;
 int n, score = 0;
 struct Rat{ int time; int value; }rat[102];
-int site[102] = { 0 };
+int site[102] = { 0 };				//site[i] 第i次出手是否打地鼠
 
-int cmp(struct Rat a, struct Rat b)
-{
-	return a.value > b.value;
-}
+int cmp(struct Rat a, struct Rat b){return a.value > b.value;}
 
 int main()
 {
@@ -28,20 +27,18 @@ int main()
 		scanf("%d", &rat[i].time);
 	for (int i = 0; i < n; i++)
 		scanf("%d", &rat[i].value);
-	sort(rat, rat + n, cmp);
-	
+	sort(rat, rat + n, cmp);		//按照地鼠的分值排序
 	int a;
 	for (int i = 0; i < n; i++)
 	{
 		a = rat[i].time;
 		while (site[a] && a >= 1)
 			a--;
-		if (a == 0)
+		if (a == 0)			//time之前的site都被占据，舍弃这个地鼠
 			continue;
-		site[a] = 1;
+		site[a] = 1;			//找到site填充这个地鼠
 		score += rat[i].value;
 	}
-	
 	printf("%d\n", score);
 	return 0;
 }
