@@ -11,10 +11,9 @@ string add(string &a, const string &b)
 {
 	string res = '0' + a;
 	int f = 0;
-	int s, t, i, j, sz = res.size();
+	int t, i, j, sz = res.size();
 	for (i = a.size() - 1, j = b.size() - 1; j >= 0; i--, j--)
 	{
-		s = a[i] - '0';
 		t = b[j] - '0';
 		sz--;
 		if (f)
@@ -89,7 +88,6 @@ string onemul(const string &a, const char &b)
 string& mul(const string &a, const string &b)
 {
 	static string res, temp;
-	size_t f = 0, g = 0;
 	int j;
 	for (j = b.size() - 1; j >= 0; j--)
 	{
