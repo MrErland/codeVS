@@ -105,12 +105,62 @@ int main()
 		graphInsertE(g, a, b, c);
 	}
 	MSTprim(g);
-	printf("%d\n", ans);
+	printf("%lld\n", ans);
 	return 0;
 }
 
 
 // No.2 Kruskal
 
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+#define SZ 100005
+int n, m;
+int f[SZ];
+long long ans = 0;
+struct edge{ int u; int v; int w; }eg[SZ];
+int cmp(struct edge a, struct edge b){ return a.w < b.w; }
 
+int fin(int x)
+{
+	while (f[x] != x)
+		x = f[x];
+	return f[x];
+}
 
+void uni(int a, int b)
+{
+	int x = fin(a);
+	int y = fin(b);
+	if (x != y)
+		f[x] = y;
+}
+
+void MSTkruskal()
+{
+	int cnt = 0;
+	for (int i = 0; i <= n; i++)
+		f[i] = i;
+	sort(eg + 1, eg + m + 1, cmp);
+	for (int i = 1; i <= m; i++)
+	{
+		if (fin(eg[i].u) == fin(eg[i].v))		// 查找确定是否形成环， 如果形成环，则舍弃这条边
+			continue;	
+		uni(eg[i].u, eg[i].v);		//合并
+		cnt++;
+		ans += eg[i].w;
+		if (cnt == n - 1)			// 找到 n - 1 条边，即MST
+			break;
+	}
+}
+
+int main()
+{
+	scanf("%d%d", &n, &m);
+	for (int i = 1; i <= m; i++)
+		scanf("%d%d%d", &eg[i].u, &eg[i].v, &eg[i].w);	// 不需要考虑重边，因为排序后优先短边，且长边被舍弃
+	MSTkruskal();
+	printf("%lld\n", ans);
+	return 0;
+}
