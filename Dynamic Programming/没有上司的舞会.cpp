@@ -18,7 +18,7 @@ using namespace std;
 int N, happy[SZ];
 int root;
 vector <int> emp[SZ];	// 保存其直接下属
-int dp[SZ][2];			//dp[i][0] 表示i没参加舞会的最大欢乐度  dp[i][1]表示参加舞会的最大欢乐度
+int dp[SZ][2];		//dp[i][0] 表示i没参加舞会的最大欢乐度  dp[i][1]表示参加舞会的最大欢乐度
 
 void dfs(int root)
 {
@@ -35,7 +35,7 @@ void dfs(int root)
 	for (unsigned i = 0; i < emp[root].size(); i++)
 	{
 		n += max(dp[emp[root][i]][1], dp[emp[root][i]][0]);		//root不参加
-		m += dp[emp[root][i]][0];								//root参加
+		m += dp[emp[root][i]][0];					//root参加
 	}
 	dp[root][0] = n;
 	dp[root][1] = m + happy[root];
@@ -47,7 +47,7 @@ int main()
 	for (int i = 1; i <= N; i++)
 		scanf("%d", &happy[i]);
 	int t[SZ] = { 0 };
-	for (int i = 1; i < N; i++)			//保存每个boss的直接下属
+	for (int i = 1; i < N; i++)		//保存每个boss的直接下属
 	{
 		int a, b;
 		scanf("%d%d", &a, &b);
